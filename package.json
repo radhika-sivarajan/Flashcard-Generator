@@ -2,7 +2,7 @@
   "name": "flashcard-generator",
   "version": "1.0.0",
   "description": "Backend for a basic flashcard application.",
-  "main": "card.js",
+  "main": "flashCard.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
