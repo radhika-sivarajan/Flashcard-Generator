@@ -1,4 +1,3 @@
-
 // Constructor for basic flashcards.
 var BasicCard = function(frontArg, backArg){
 	this.frontArg = frontArg;

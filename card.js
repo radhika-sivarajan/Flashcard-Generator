@@ -1,9 +1,11 @@
+// Packages and files for flashcard generator
 var BasicCard = require("./BasicCard.js");
 var ClozeCard = require("./ClozeCard.js");
 var inquirer = require("inquirer");
 var fs = require("fs");
 var chalk = require("chalk");
 
+// Choices for selecting an action.
 var userOptions = [
 	{
 		type: "list",
@@ -13,6 +15,7 @@ var userOptions = [
   	}
 ];
 
+// Choices for card type.
 var cardOptions = [
 	{
 		type: "list",
@@ -22,6 +25,7 @@ var cardOptions = [
 	}
 ];
 
+// Questions for basic card.
 var basicCardQuiz = [
 	{
 		type: "input",
@@ -35,6 +39,7 @@ var basicCardQuiz = [
 	}
 ];
 
+// Questions for cloze card.
 var clozeCardQuiz = [
 	{
 		type: "input",
@@ -48,6 +53,7 @@ var clozeCardQuiz = [
 	}
 ]
 
+// Prompt user to view or create card(s).
 function runUserOption(){
 	inquirer.prompt(userOptions).then(function(user) {
 		switch(user.userChoice){
@@ -61,6 +67,7 @@ function runUserOption(){
 	});
 }
 
+// Prompt user to select a card type.
 function createCard(){
 	inquirer.prompt(cardOptions).then(function(card){
 		switch(card.cardType){
@@ -74,6 +81,7 @@ function createCard(){
 	});
 }
 
+// Prompt basic card questions and save answer to a file.
 function createBasicCard(){
 	inquirer.prompt(basicCardQuiz).then(function(basicQuiz){
 		var appendText = {
@@ -81,10 +89,11 @@ function createBasicCard(){
 			front: basicQuiz.front,
 			back: basicQuiz.back,
 		}
-		fs.appendFile("cards.txt",JSON.stringify(appendText) + "\n");
+		fs.appendFile("cards.txt",JSON.stringify(appendText) + "\r\n");
 	});
 }
 
+// Prompt cloze card questions and save answer to a file.
 function createClozeCard(){
 	inquirer.prompt(clozeCardQuiz).then(function(clozeQuiz){
 
@@ -93,38 +102,43 @@ function createClozeCard(){
 			text: clozeQuiz.text,
 			cloze: clozeQuiz.cloze
 		}
-		fs.appendFile("cards.txt",JSON.stringify(appendText) + "\n");
+		fs.appendFile("cards.txt",JSON.stringify(appendText) + "\r\n");
 	});
 }
 
-
+// Create object with the constructors to view each card details.
 function viewCard(){
 	fs.readFile("cards.txt", 'utf8', function(error, data){
-		var cards = data.split("\n");
-		var count = 0;
-		var info = ["Card Front : ", "\nCard back: ", "Full text : ", "\nPartial text : ", "\nCloze text : "];
 
-		cards.forEach(function (card) {
-			if(card.length > 0){
-				count++;
-				console.log(chalk.red.bold("Card " + count));
-				card = JSON.parse(card);
-				switch(card.type){
-					case ("Basic"):
-						var card = new BasicCard(card.front, card.back);
-						console.log(chalk.blue(info[0]) + card.showFront() 
-							+ chalk.blue(info[1]) + card.showBack());
-						break;
-					case ("Cloze"):
-						var card = new ClozeCard(card.text, card.cloze);
-						console.log(chalk.blue(info[2]) + card.fullText() 
-							+ chalk.blue(info[3]) + card.partialText()
-							+ chalk.blue(info[4]) + card.clozeText());
-						break;
+		if(!error){
+			var cards = data.split("\r\n");
+			var count = 0;
+			var info = ["Card Front : ", "\nCard back: ", "Full text : ", "\nPartial text : ", "\nCloze text : "];
+			
+			cards.forEach(function (card) {
+				if(card.length > 37){
+					count++;
+					card = JSON.parse(card);
+					console.log(chalk.red.bold("Card " + count ) + " (" + card.type + ")");
+
+					switch(card.type){
+						case ("Basic"):
+							var card = new BasicCard(card.front, card.back);
+							console.log(chalk.blue(info[0]) + card.showFront() 
+								+ chalk.blue(info[1]) + card.showBack());
+							break;
+						case ("Cloze"):
+							var card = new ClozeCard(card.text, card.cloze);
+							console.log(chalk.blue(info[2]) + card.fullText() 
+								+ chalk.blue(info[4]) + card.clozeText()
+								+ chalk.blue(info[3]) + card.partialText());
+							break;
+					}
 				}
-			}
-		});
+			});
+		}
 	});
 }
 
+// Run first user prompt
 runUserOption();
