@@ -115,7 +115,7 @@ function viewCard(){
 		if(!error){
 			var cards = data.split("\r\n");
 			var count = 0;
-			var info = ["Card Front : ", "\nCard back: ", "Full text : ", "\nPartial text : ", "\nCloze delete text : "];
+			var info = ["Card Front: ", "\nCard back: ", "Full text: ", "\nCloze delete text: ", "\nPartial text: "];
 			
 			cards.forEach(function (card) {
 				if(card.length > 37){
@@ -136,8 +136,8 @@ function viewCard(){
 							var card = ClozeCard(card.text, card.cloze);
 							console.log(title + "\n"
 								+ chalk.blue(info[2]) + card.fullText()
-								+ chalk.blue(info[4]) + card.clozeText()
-								+ chalk.blue(info[3]) + card.partialText());
+								+ chalk.blue(info[3]) + card.clozeText()
+								+ chalk.blue(info[4]) + card.partialText());
 							break;
 					}
 				}
