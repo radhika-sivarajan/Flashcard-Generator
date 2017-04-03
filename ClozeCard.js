@@ -3,8 +3,12 @@ var chalk = require("chalk");
 
 // Constructor for cloze flashcards.
 var ClozeCard = function(textArg, clozeArg){
-	this.textArg = textArg;
-	this.clozeArg = clozeArg;
+	if (this instanceof ClozeCard) {
+		this.textArg = textArg;
+		this.clozeArg = clozeArg;
+	}else {
+        return new ClozeCard(textArg, clozeArg);
+    }
 };
 
 /* ***** Extended methods for constructor ClozeCard. ***** */

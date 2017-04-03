@@ -5,3 +5,5 @@
 {"type":"Cloze","text":"Giraffe is the tallest animal.","cloze":"giraffe"}
 {"type":"cloze","text":"There are 201 bones in a human body","cloze":"203"}
 {"type":"Basic","front":"Largest Continent?","back":"Asia"}
+{"type":"Basic","front":"","back":""}
+{"type":"Cloze","text":"","cloze":""}

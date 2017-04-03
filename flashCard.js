@@ -126,14 +126,14 @@ function viewCard(){
 					switch(card.type){
 						case ("basic"):
 						case ("Basic"):
-							var card = new BasicCard(card.front, card.back);
+							var card = BasicCard(card.front, card.back);
 							console.log(title + "\n"
 								+ chalk.blue(info[0]) + card.showFront()
 								+ chalk.blue(info[1]) + card.showBack());
 							break;
 						case ("cloze"):
 						case ("Cloze"):
-							var card = new ClozeCard(card.text, card.cloze);
+							var card = ClozeCard(card.text, card.cloze);
 							console.log(title + "\n"
 								+ chalk.blue(info[2]) + card.fullText()
 								+ chalk.blue(info[4]) + card.clozeText()
