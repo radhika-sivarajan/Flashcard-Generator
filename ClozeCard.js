@@ -1,7 +1,7 @@
 // Package for terminal colors
 var chalk = require("chalk");
 
-// Constructor for cloze flashcards.
+// Constructor for cloze flashcards. (scope-safe)
 var ClozeCard = function(textArg, clozeArg){
 	if (this instanceof ClozeCard) {
 		this.textArg = textArg;
