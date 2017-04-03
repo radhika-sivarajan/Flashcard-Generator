@@ -1,9 +1,8 @@
-{"type":"Basic","front":"India independence?","back":"1947"}
 {"type":"Cloze","text":"George Washington was the first president of the United States.","cloze":"george washington"}
 {"type":"Basic","front":"Biggest animal on earth?","back":"Blue whale"}
-{"type":"Basic","front":"Longest river?","back":"Nile"}
 {"type":"Cloze","text":"Giraffe is the tallest animal.","cloze":"giraffe"}
 {"type":"cloze","text":"There are 201 bones in a human body","cloze":"203"}
 {"type":"Basic","front":"Largest Continent?","back":"Asia"}
 {"type":"Basic","front":"","back":""}
 {"type":"Cloze","text":"","cloze":""}
+{"type":"Cloze","text":"Mr Blue has a blue house and a blue car.","cloze":"blue"}
