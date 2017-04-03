@@ -115,7 +115,7 @@ function viewCard(){
 		if(!error){
 			var cards = data.split("\r\n");
 			var count = 0;
-			var info = ["Card Front : ", "\nCard back: ", "Full text : ", "\nPartial text : ", "\nCloze text : "];
+			var info = ["Card Front : ", "\nCard back: ", "Full text : ", "\nPartial text : ", "\nCloze delete text : "];
 			
 			cards.forEach(function (card) {
 				if(card.length > 37){
