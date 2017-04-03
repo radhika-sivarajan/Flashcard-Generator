@@ -121,7 +121,7 @@ function viewCard(){
 				if(card.length > 37){
 					count++;
 					card = JSON.parse(card);
-					var title = chalk.red.bold("Card " + count ) + " (" + card.type.toLowerCase() + ")";
+					var title = chalk.red.bold("Flash card " + count ) + " (" + card.type.toLowerCase() + ")";
 
 					switch(card.type){
 						case ("basic"):
