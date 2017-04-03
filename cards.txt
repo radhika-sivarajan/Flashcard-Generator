@@ -3,4 +3,5 @@
 {"type":"Basic","front":"Biggest animal on earth?","back":"Blue whale"}
 {"type":"Basic","front":"Longest river?","back":"Nile"}
 {"type":"Cloze","text":"Giraffe is the tallest animal.","cloze":"giraffe"}
-{"type":"Cloze","text":"There are 201 bones in a human body","cloze":"203"}
+{"type":"cloze","text":"There are 201 bones in a human body","cloze":"203"}
+{"type":"Basic","front":"Largest Continent?","back":"Asia"}

@@ -106,7 +106,9 @@ function createClozeCard(){
 	});
 }
 
-// Create object with the constructors to view each card details.
+// Read cards from file 
+// Create object for each of them with the constructors 
+// View each card details.
 function viewCard(){
 	fs.readFile("cards.txt", 'utf8', function(error, data){
 
@@ -119,17 +121,21 @@ function viewCard(){
 				if(card.length > 37){
 					count++;
 					card = JSON.parse(card);
-					console.log(chalk.red.bold("Card " + count ) + " (" + card.type + ")");
+					var title = chalk.red.bold("Card " + count ) + " (" + card.type.toLowerCase() + ")";
 
 					switch(card.type){
+						case ("basic"):
 						case ("Basic"):
 							var card = new BasicCard(card.front, card.back);
-							console.log(chalk.blue(info[0]) + card.showFront() 
+							console.log(title + "\n"
+								+ chalk.blue(info[0]) + card.showFront()
 								+ chalk.blue(info[1]) + card.showBack());
 							break;
+						case ("cloze"):
 						case ("Cloze"):
 							var card = new ClozeCard(card.text, card.cloze);
-							console.log(chalk.blue(info[2]) + card.fullText() 
+							console.log(title + "\n"
+								+ chalk.blue(info[2]) + card.fullText()
 								+ chalk.blue(info[4]) + card.clozeText()
 								+ chalk.blue(info[3]) + card.partialText());
 							break;
