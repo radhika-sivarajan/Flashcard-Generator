@@ -1,0 +1,23 @@
+{
+  "name": "flashcard-generator",
+  "version": "1.0.0",
+  "description": "Backend for a basic flashcard application.",
+  "main": "card.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radhika-sivarajan/Flashcard-Generator.git"
+  },
+  "keywords": [
+    "nodejs",
+    "npm"
+  ],
+  "author": "radhika-sivarajan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/radhika-sivarajan/Flashcard-Generator/issues"
+  },
+  "homepage": "https://github.com/radhika-sivarajan/Flashcard-Generator#readme"
+}
