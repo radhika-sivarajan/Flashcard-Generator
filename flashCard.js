@@ -11,7 +11,7 @@ var userOptions = [
 		type: "list",
 	    name: "userChoice",
 	    message: "What is your option for flash card?",
-	    choices: ["View", "Create"]
+	    choices: ["View", "Create", "Delete"]
   	}
 ];
 
@@ -30,12 +30,24 @@ var basicCardQuiz = [
 	{
 		type: "input",
 		name: "front",
-		message: "What should be on the front of the card?",		
+		message: "What should be on the front of the card?",
+		validate: function (name){
+			if(name.length !== 0)
+				return true;
+			else
+				return "This field cannot be empty!";
+		}
 	},
 	{
 		type: "input",
 		name: "back",
-		message: "What should be on the back of the card?",		
+		message: "What should be on the back of the card?",	
+		validate: function (name){
+			if(name.length !== 0)
+				return true;
+			else
+				return "This field cannot be empty!";
+		}	
 	}
 ];
 
@@ -44,12 +56,24 @@ var clozeCardQuiz = [
 	{
 		type: "input",
 		name: "text",
-		message: "Enter the full text."
+		message: "Enter the full text.",
+		validate: function (name){
+			if(name.length !== 0)
+				return true;
+			else
+				return "This field cannot be empty!";
+		}
 	},
 	{
 		type: "input",
 		name: "cloze",
-		message: "Which text need to be hidden?"
+		message: "Which text need to be hidden?",
+		validate: function (name){
+			if(name.length !== 0)
+				return true;
+			else
+				return "This field cannot be empty!";
+		}
 	}
 ]
 
@@ -62,6 +86,9 @@ function runUserOption(){
 				break;
 			case ("Create"):
 				createCard();
+				break;
+			case ("Delete"):
+				deleteCard();
 				break;				
 		}
 	});
@@ -141,6 +168,44 @@ function viewCard(){
 							break;
 					}
 				}
+			});
+		}
+	});
+}
+
+// Delete card from the text file
+function deleteCard(){
+	var cardDataArray= [];
+	fs.readFile("cards.txt", 'utf8', function(error, data){
+		if(!error){
+			var cards = data.split("\r\n");			
+			cards.forEach(function (card) {
+				if(card.length > 37){
+					card = JSON.parse(card);				
+					if(card.type === "Basic"){
+						cardDataArray.push(card.front);
+					}else if(card.type === "Cloze"){
+						cardDataArray.push(card.text);
+					}					
+				}
+			});
+
+			inquirer.prompt([
+				{
+					name: 'deleteCardQuiz',
+					type: 'list',
+					message: 'Which card you want to delete?',
+					choices: cardDataArray
+				}
+			]).then(function(cardDelete){
+				var index = null;				
+				for (var i = 0; i < cards.length; i++){
+					if (cards[i].match(cardDelete.deleteCardQuiz)){
+						index = i;
+					}
+				}
+				delete cards[index];	
+				fs.writeFile("cards.txt",cards.join('\r\n'));							
 			});
 		}
 	});
