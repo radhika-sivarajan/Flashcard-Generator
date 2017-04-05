@@ -208,7 +208,7 @@ function deleteCard(){
 					delete cards[index],
 					fs.writeFile("cards.txt",cards.join('\r\n')),
 					console.log(chalk.green("Deleted the card"))
-				 ) : console.log(chalk.red("Cannot delete this card"));							
+				) : console.log(chalk.red("Cannot delete this card"));											
 			});
 		}
 	});
