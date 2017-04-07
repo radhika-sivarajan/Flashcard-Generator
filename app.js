@@ -32,10 +32,10 @@ var basicCardQuiz = [
 		name: "front",
 		message: "What should be on the front of the card?",
 		validate: function (name){
-			if(name.length !== 0)
-				return true;
-			else
+			if(!name)
 				return "This field cannot be empty!";
+			else
+				return true;
 		}
 	},
 	{
@@ -43,10 +43,10 @@ var basicCardQuiz = [
 		name: "back",
 		message: "What should be on the back of the card?",	
 		validate: function (name){
-			if(name.length !== 0)
-				return true;
-			else
+			if(!name)
 				return "This field cannot be empty!";
+			else
+				return true;
 		}	
 	}
 ];
@@ -58,10 +58,10 @@ var clozeCardQuiz = [
 		name: "text",
 		message: "Enter the full text.",
 		validate: function (name){
-			if(name.length !== 0)
-				return true;
-			else
+			if(!name)
 				return "This field cannot be empty!";
+			else
+				return true;
 		}
 	},
 	{
@@ -69,10 +69,10 @@ var clozeCardQuiz = [
 		name: "cloze",
 		message: "Which text need to be hidden?",
 		validate: function (name){
-			if(name.length !== 0)
-				return true;
-			else
+			if(!name)
 				return "This field cannot be empty!";
+			else
+				return true;
 		}
 	}
 ]
@@ -80,14 +80,14 @@ var clozeCardQuiz = [
 // Prompt user to view or create card(s).
 function runUserOption(){
 	inquirer.prompt(userOptions).then(function(user) {
-		switch(user.userChoice){
-			case ("View"):
+		switch(user.userChoice.toLowerCase()){
+			case ("view"):
 				viewCard();
 				break;
-			case ("Create"):
+			case ("create"):
 				createCard();
 				break;
-			case ("Delete"):
+			case ("delete"):
 				deleteCard();
 				break;				
 		}
@@ -97,11 +97,11 @@ function runUserOption(){
 // Prompt user to select a card type.
 function createCard(){
 	inquirer.prompt(cardOptions).then(function(card){
-		switch(card.cardType){
-			case ("Basic"):
+		switch(card.cardType.toLowerCase()){
+			case ("basic"):
 				createBasicCard();
 				break;
-			case ("Cloze"):
+			case ("cloze"):
 				createClozeCard();
 				break;
 		}
@@ -150,16 +150,14 @@ function viewCard(){
 					card = JSON.parse(card);
 					var title = chalk.red.bold("Flash card " + count ) + " (" + card.type.toLowerCase() + ")";
 
-					switch(card.type){
+					switch(card.type.toLowerCase()){
 						case ("basic"):
-						case ("Basic"):
 							var card = BasicCard(card.front, card.back);
 							console.log(title + "\n"
 								+ chalk.blue(info[0]) + card.showFront()
 								+ chalk.blue(info[1]) + card.showBack());
 							break;
 						case ("cloze"):
-						case ("Cloze"):
 							var card = ClozeCard(card.text, card.cloze);
 							console.log(title + "\n"
 								+ chalk.blue(info[2]) + card.fullText()
