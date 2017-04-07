@@ -138,12 +138,10 @@ function createClozeCard(){
 // View each card details.
 function viewCard(){
 	fs.readFile("cards.txt", 'utf8', function(error, data){
-
 		if(!error){
 			var cards = data.split("\r\n");
 			var count = 0;
-			var info = ["Card Front: ", "\nCard back: ", "Full text: ", "\nCloze delete text: ", "\nPartial text: "];
-			
+			var info = ["Card Front: ", "\nCard back: ", "Full text: ", "\nCloze delete text: ", "\nPartial text: "];			
 			cards.forEach(function (card) {
 				if(card.length > 37){
 					count++;
@@ -173,6 +171,7 @@ function viewCard(){
 
 // Delete card from the text file
 function deleteCard(){
+	//Array for card questions as user choice
 	var cardDataArray= [];
 	fs.readFile("cards.txt", 'utf8', function(error, data){
 		if(!error){
@@ -206,7 +205,7 @@ function deleteCard(){
 					delete cards[index],
 					fs.writeFile("cards.txt",cards.join('\r\n')),
 					console.log(chalk.green("Deleted the card"))
-				) : console.log(chalk.red("Cannot delete this card"));											
+				) : console.log(chalk.red("Cannot delete this card"));										
 			});
 		}
 	});
